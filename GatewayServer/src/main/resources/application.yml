@@ -1,0 +1,28 @@
+server:
+  port: 8080
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      routes:
+        - id: product-server
+          uri: http://localhost:8083/
+          predicates:
+            - Path=/api/product/**
+            - Method=GET,POST
+        - id: user-server
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/api/auth/**
+            - Method=POST
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST

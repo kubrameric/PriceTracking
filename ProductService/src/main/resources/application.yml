@@ -1,0 +1,47 @@
+server:
+  port: 8083
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka
+spring:
+  application:
+    name: product-server
+  datasource:
+    url: jdbc:mysql://localhost:3306/price_tracking
+    username: kubra
+    password: b171210013+-
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        globally_quoted_identifiers: true
+  sql:
+    init:
+      mode: always
+
+kafka.producer.acks: all
+kafka.producer.bootstrapServers: 127.0.0.1:9092
+kafka.producer.keySerializer: org.apache.kafka.common.serialization.StringSerializer
+kafka.producer.valueSerializer: org.apache.kafka.common.serialization.StringSerializer
+
+
+kafka.consumer.acks: all
+kafka.consumer.groupId: product-group
+kafka.consumer.bootstrapServers: 127.0.0.1:9092
+kafka.consumer.keySerializer: org.apache.kafka.common.serialization.StringDeserializer
+kafka.consumer.valueSerializer: org.apache.kafka.common.serialization.JsonDeserializer
+
+user.kafka.consumer.acks: all
+user.kafka.consumer.bootstrapServers: 127.0.0.1:9092
+user.kafka.consumer.keySerializer: org.apache.kafka.common.serialization.StringDeserializer
+user.kafka.consumer.valueSerializer: org.apache.kafka.common.serialization.JsonDeserializer
+user.kafka.consumer.groupId: email-group
+

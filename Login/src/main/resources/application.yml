@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: user-server
+  datasource:
+    url: jdbc:mysql://localhost:3306/price_tracking
+    username: kubra
+    password: b171210013+-
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        globally_quoted_identifiers: true
+  sql:
+    init:
+      mode: always
+server:
+  port: 8082
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka
+
+kafka.producer.acks: all
+kafka.producer.bootstrapServers: 127.0.0.1:9092
+kafka.producer.keySerializer: org.apache.kafka.common.serialization.StringSerializer
+kafka.producer.valueSerializer: org.apache.kafka.common.serialization.StringSerializer
+
+
+kafka.consumer.acks: all
+kafka.consumer.groupId: user-group
+kafka.consumer.bootstrapServers: 127.0.0.1:9092
+kafka.consumer.keySerializer: org.apache.kafka.common.serialization.StringDeserializer
+kafka.consumer.valueSerializer: org.apache.kafka.common.serialization.JsonDeserializer
